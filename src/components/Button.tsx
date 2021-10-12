@@ -1,8 +1,6 @@
 import { Icon } from './Icon';
-
 import '../styles/button.scss';
 import { ButtonHTMLAttributes, memo } from 'react';
-
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   iconName: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
@@ -20,5 +18,5 @@ function ButtonComponent({ iconName, title, selected, ...rest }: ButtonProps) {
 
 // Vai re-renderizar se as props forem diferentes
 export const Button = memo(ButtonComponent, (prevProps, nextProps) => {
-  return prevProps.id === nextProps.id;
+  return prevProps.selected === nextProps.selected
 })
