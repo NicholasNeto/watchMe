@@ -1,7 +1,5 @@
 import { MovieCard } from "./MovieCard";
-
-
-
+import { List, ListRowRenderer, AutoSize } from 'react-virtualized'
 interface MovieProps {
   Title: string;
   Poster: string;
@@ -23,6 +21,22 @@ interface ContentProps {
 }
 
 export function Content({ movies, selectedGenre }: ContentProps) {
+
+  const rowRenderer: ListRowRenderer = ({ index, key, style }) => {
+    return (
+      <div key={key} style={style} >
+        <MovieCard
+          title={movies[index].Title}
+          poster={movies[index].Poster}
+          runtime={movies[index].Runtime}
+          rating={movies[index].Ratings[0].Value}
+        />
+      </div>
+    )
+  }
+
+
+
   return (
     <div className="container">
       <header>
@@ -31,6 +45,18 @@ export function Content({ movies, selectedGenre }: ContentProps) {
 
       <main>
         <div className="movies-list">
+
+          {/* <List
+
+            height={800}
+            rowHeight={70}
+            width={1220}
+            overscanRowCount={10}
+            rowCount={movies.length}
+            rowRenderer={rowRenderer}
+          /> */}
+
+
           {movies.map(movie => (
             <MovieCard title={movie.Title} poster={movie.Poster} runtime={movie.Runtime} rating={movie.Ratings[0].Value} />
           ))}
